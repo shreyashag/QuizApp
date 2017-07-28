@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.shreyashagarwal.userinput_3_quizapp.MainActivity">
+
+
+
+    <RelativeLayout
+        android:padding="24dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp"
+        >
+
+        <TextView
+            android:id="@+id/category_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Select Category in the dropdown spinner."
+            />
+
+        <Spinner
+            android:id="@+id/quiz_category"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/category_text">
+        </Spinner>
+
+        <TextView
+            android:id="@+id/diff_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select your difficulty level-"
+            android:layout_above="@+id/start_quiz_button"
+            android:layout_below="@+id/quiz_category"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"/>
+
+
+        <RadioGroup
+            android:id="@+id/diff_radio"
+            android:layout_toRightOf="@id/diff_text"
+            android:layout_below="@id/quiz_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Any"
+                />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Easy"
+                />
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Medium"
+                />
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hard"
+                />
+        </RadioGroup>
+
+
+        <Button
+            android:id="@+id/start_quiz_button"
+            android:text="@string/start_quiz_button"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/diff_radio"
+            android:layout_marginTop="50dp"/>
+
+    </RelativeLayout>
+
+
+
+
+</android.support.constraint.ConstraintLayout>
