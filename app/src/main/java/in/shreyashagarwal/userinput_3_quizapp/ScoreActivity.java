@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ScoreActivity extends AppCompatActivity {
 
@@ -34,4 +35,12 @@ public class ScoreActivity extends AppCompatActivity {
         TextView ScoreView=(TextView)findViewById(R.id.scoreView);
         ScoreView.setText( ("Your score was : " + score+"\n.To play again press Restart").toString());
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent startMainActivity=new Intent(ScoreActivity.this,MainActivity.class);
+        startActivity(startMainActivity);
+    }
+
+
 }

@@ -114,4 +114,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        //ask the user if he really wants to quit or go by android guidelines?
+    }
+
 }

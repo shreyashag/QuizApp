@@ -243,4 +243,23 @@ public class QuizActivity extends AppCompatActivity {
 
         queue.add(getQuiz);
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();  // Always call the superclass method first
+        // Release the Camera because we don't need it when paused
+        // and other activities might need to use it.
+        if (gameloop!= null) {
+            gameloop.pause();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (gameloop!= null) {
+            gameloop.pause();
+        }
+        Toast.makeText(QuizActivity.this,"Can't go back now! Finish the quiz!",Toast.LENGTH_SHORT).show();
+    }
+
 }
