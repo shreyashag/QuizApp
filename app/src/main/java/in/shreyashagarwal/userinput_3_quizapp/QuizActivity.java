@@ -44,18 +44,19 @@ public class QuizActivity extends AppCompatActivity {
     TextView scoreTV;
     JSONArray results;
     String correctString;
-    int questionNumber=0;
+    int correctPos;
     int selectedOption;
+    int questionNumber=0;
     int correct=0;
     MediaPlayer correctSound,incorrectSound,gameloop;
     Vibrator vibrator;
 
     public void checkAnswer(){
-        Log.d("selected", "selected option: "+ selectedOption);
         RadioButton selectedRadio=(RadioButton)findViewById(radioGroup.getCheckedRadioButtonId());
         String selectedString=selectedRadio.getText().toString();
         Log.d("selected", selectedString );
-        if (selectedString.equals(correctString)){
+//        if (selectedString.equals(correctString)){
+        if (selectedOption==correctPos){
             correct++;
             gameloop.pause();
             correctSound.start();
@@ -108,6 +109,7 @@ public class QuizActivity extends AppCompatActivity {
 
             //Need a method to randomize correct answer location
             correct_position=positionsList.get(0);
+            correctPos=correct_position;
             ((RadioButton)radioGroup.getChildAt(correct_position)).setText(correctString);
 
             if (question_data.getString("type").equals("multiple")) {
@@ -234,8 +236,7 @@ public class QuizActivity extends AppCompatActivity {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                int selectedId = radioGroup.getCheckedRadioButtonId();
-                selectedOption=selectedId;
+                selectedOption = radioGroup.indexOfChild(findViewById(radioGroup.getCheckedRadioButtonId()));
                 Log.d("selected", "selected option: "+ selectedOption);
             }
         });
