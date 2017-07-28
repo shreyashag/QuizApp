@@ -255,6 +255,12 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        gameloop.start();
+    }
+
+    @Override
     public void onBackPressed() {
         if (gameloop!= null) {
             gameloop.pause();
