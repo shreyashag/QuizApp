@@ -1,54 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="in.shreyashagarwal.userinput_3_quizapp.ScoreActivity"
-    >
-    <LinearLayout
+    <android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="4"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true">
-        <TextView
-            android:textAlignment="center"
-            android:gravity="bottom"
+        android:layout_height="match_parent"
+        tools:context="in.shreyashagarwal.userinput_3_quizapp.ScoreActivity"
+        >
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="48sp"
-            android:text="You Scored:"
-            android:textColor="#000"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="8dp"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/scoreView"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="48sp"
-            android:textAlignment="center"
-            android:textColor="#000"
-            android:text="8/10"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="8dp"
-            android:layout_weight="2"/>
+            android:orientation="vertical"
+            android:weightSum="4"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true">
+            <TextView
+                android:textAlignment="center"
+                android:gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="48sp"
+                android:text="You Scored:"
+                android:textColor="#000"
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="8dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/scoreView"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="48sp"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:text="8/10"
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="8dp"
+                android:layout_weight="2"/>
 
-        <Button
-            android:gravity="top"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/restartButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Restart"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="8dp"
-            />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <Button
+                    android:id="@+id/restartButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Restart"
+                    android:layout_weight="2"
+                    />
+
+                <Button
+                    android:layout_weight="2"
+                    android:id="@+id/shareButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Share"
+                    />
+            </LinearLayout>
+        </LinearLayout>
 
 
 
-</android.widget.RelativeLayout>
+    </android.widget.RelativeLayout>

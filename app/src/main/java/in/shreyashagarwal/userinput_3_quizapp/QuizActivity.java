@@ -57,15 +57,17 @@ public class QuizActivity extends AppCompatActivity {
             correct++;
             gameloop.pause();
             correctSound.start();
-            vibrator.vibrate(1000);
+            long[] correctVibrate= {0, 200, 100, 200};
+            vibrator.vibrate(correctVibrate,-1);
             gameloop.start();
 //            Toast.makeText(QuizActivity.this,"Correct!", Toast.LENGTH_SHORT).show();
         }
         else
-            {
+        {
             gameloop.pause();
             incorrectSound.start();
-            vibrator.vibrate(1000);
+            long[] incorrectVibrate= {0, 500};
+            vibrator.vibrate(incorrectVibrate,-1);
             gameloop.start();
 //            Toast.makeText(QuizActivity.this,"Wrong!", Toast.LENGTH_SHORT).show();
         }
