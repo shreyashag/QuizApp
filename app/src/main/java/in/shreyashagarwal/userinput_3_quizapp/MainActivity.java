@@ -106,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     url="https://opentdb.com/api.php?amount=10&category="+openTriviaID+"&difficulty="+diffLevel;
                 }
-                Toast.makeText(MainActivity.this,url, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this,url, Toast.LENGTH_SHORT).show();
+                //Show loading screen which should load the quizActivity in background
                 Intent intent = new Intent(MainActivity.this,QuizActivity.class);
                 intent.putExtra("URL",url);
                 startActivity(intent);

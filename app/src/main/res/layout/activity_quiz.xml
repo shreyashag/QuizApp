@@ -48,18 +48,31 @@
                 android:layout_gravity="center_vertical"
                 />
         </LinearLayout>
+        <TextView
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Question:"
+            android:textSize="24dp"
+            android:textAllCaps="true"
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            android:textColor="#000"
+            />
 
         <TextView
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:id="@+id/questionTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="Question:"
+            android:layout_weight="2"
+            android:text="Who is the president of India?"
             android:textSize="24dp"
             android:textAllCaps="true"
             android:gravity="center_vertical"
-            android:textAlignment="gravity"
+            android:textAlignment="center"
+            android:textColor="#000"
             />
 
         <RadioGroup
@@ -68,42 +81,51 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:weightSum="4"
+            android:layout_marginLeft="24sp"
             >
 
+
             <RadioButton
-                android:id="@+id/r1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:id="@+id/r1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:buttonTint="@color/textColorPrimary"
                 android:textSize="20dp"
+                android:background="@drawable/button_background"
                 />
+
 
             <RadioButton
                 android:id="@+id/r2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:buttonTint="@color/textColorPrimary"
+                android:buttonTint="#FFF"
                 android:textSize="20dp"
+                android:background="@drawable/button_background_dark"
+                android:textColor="#fff"
                 />
 
             <RadioButton
                 android:id="@+id/r3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:buttonTint="@color/textColorPrimary"
                 android:textSize="20dp"
+                android:background="@drawable/button_background"
                 />
 
             <RadioButton
                 android:id="@+id/r4"
-                android:layout_width="wrap_content"
+                android:background="@drawable/button_background_dark"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:buttonTint="@color/textColorPrimary"
+                android:buttonTint="#FFF"
                 android:textSize="20dp"
+                android:textColor="#fff"
                 />
 
         </RadioGroup>

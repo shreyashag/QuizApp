@@ -52,9 +52,6 @@ public class QuizActivity extends AppCompatActivity {
     Vibrator vibrator;
 
     public void checkAnswer(){
-        RadioButton selectedRadio=(RadioButton)findViewById(radioGroup.getCheckedRadioButtonId());
-        String selectedString=selectedRadio.getText().toString();
-        Log.d("selected", selectedString );
 //        if (selectedString.equals(correctString)){
         if (selectedOption==correctPos){
             correct++;
@@ -62,7 +59,7 @@ public class QuizActivity extends AppCompatActivity {
             correctSound.start();
             vibrator.vibrate(1000);
             gameloop.start();
-            Toast.makeText(QuizActivity.this,"Correct!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(QuizActivity.this,"Correct!", Toast.LENGTH_SHORT).show();
         }
         else
             {
@@ -70,7 +67,7 @@ public class QuizActivity extends AppCompatActivity {
             incorrectSound.start();
             vibrator.vibrate(1000);
             gameloop.start();
-            Toast.makeText(QuizActivity.this,"Wrong!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(QuizActivity.this,"Wrong!", Toast.LENGTH_SHORT).show();
         }
         if (questionNumber<9){
             questionNumber++;
@@ -78,8 +75,7 @@ public class QuizActivity extends AppCompatActivity {
         }
         else {
             Intent scoreActivity=new Intent(QuizActivity.this,ScoreActivity.class);
-            gameloop.stop();
-            gameloop.release();
+            gameloop.pause();
             scoreActivity.putExtra("correct",correct);
             startActivity(scoreActivity);
         }
@@ -94,7 +90,7 @@ public class QuizActivity extends AppCompatActivity {
             String questionString=question_data.getString("question");
             correctString=question_data.getString("correct_answer");
 
-            questionTV.setText("QUESTION:  " +   fromHtml(questionString).toString());
+            questionTV.setText(fromHtml(questionString).toString());
 
             Random r = new Random();
             int correct_position = 0;
@@ -185,6 +181,7 @@ public class QuizActivity extends AppCompatActivity {
 
         radioGroup= (RadioGroup)findViewById(R.id.radiogroup);
         questionTV= (TextView)findViewById(R.id.questionTV);
+        questionTV.setText("");
         questionNumberTV = (TextView)findViewById(R.id.questionNumberTV);
         scoreTV =(TextView)findViewById(R.id.scoreTV);
         Button nextButton = (Button)findViewById(R.id.nextButton);

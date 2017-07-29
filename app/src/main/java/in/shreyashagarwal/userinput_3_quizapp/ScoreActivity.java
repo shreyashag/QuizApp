@@ -33,7 +33,7 @@ public class ScoreActivity extends AppCompatActivity {
             score = (int) bd.get("correct");
         }
         TextView ScoreView=(TextView)findViewById(R.id.scoreView);
-        ScoreView.setText( ("Your score was : " + score+"\n.To play again press Restart").toString());
+        ScoreView.setText( (score+"/10").toString());
     }
 
     @Override
