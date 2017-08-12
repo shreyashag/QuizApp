@@ -2,12 +2,15 @@ package in.shreyashagarwal.userinput_3_quizapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Vibrator;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -30,9 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.Random;
 
 
@@ -52,7 +53,7 @@ public class QuizActivity extends AppCompatActivity {
     Vibrator vibrator;
 
     public void checkAnswer(){
-//        if (selectedString.equals(correctString)){
+//        radioGroup.getChildAt(correctPos).setBackgroundColor(getResources().getColor(R.color.green));
         if (selectedOption==correctPos){
             correct++;
             gameloop.pause();
@@ -60,7 +61,6 @@ public class QuizActivity extends AppCompatActivity {
             long[] correctVibrate= {0, 200, 100, 200};
             vibrator.vibrate(correctVibrate,-1);
             gameloop.start();
-//            Toast.makeText(QuizActivity.this,"Correct!", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -69,8 +69,9 @@ public class QuizActivity extends AppCompatActivity {
             long[] incorrectVibrate= {0, 500};
             vibrator.vibrate(incorrectVibrate,-1);
             gameloop.start();
-//            Toast.makeText(QuizActivity.this,"Wrong!", Toast.LENGTH_SHORT).show();
         }
+
+
         if (questionNumber<9){
             questionNumber++;
             loadNextQuestion();
@@ -94,38 +95,52 @@ public class QuizActivity extends AppCompatActivity {
 
             questionTV.setText(fromHtml(questionString).toString());
 
-            Random r = new Random();
             int correct_position = 0;
 
-            ArrayList<Integer> positionsList=new ArrayList<>();
-            positionsList.add(0);
-            positionsList.add(1);
-            positionsList.add(2);
-            positionsList.add(3);
-
-            Collections.shuffle(positionsList);
-
-            //Need a method to randomize correct answer location
-            correct_position=positionsList.get(0);
-            correctPos=correct_position;
-            ((RadioButton)radioGroup.getChildAt(correct_position)).setText(correctString);
-
             if (question_data.getString("type").equals("multiple")) {
+                ArrayList<Integer> positionsList=new ArrayList<>();
+                positionsList.add(0);
+                positionsList.add(1);
+                positionsList.add(2);
+                positionsList.add(3);
+                //Need a method to randomize correct answer location
+                Collections.shuffle(positionsList);
+                correct_position=positionsList.get(0);
+                correctPos=correct_position;
+                ((RadioButton)radioGroup.getChildAt(correct_position)).setText(correctString);
 
                 //load mcq incorrect options
-                String incorrect_answers_string[]= new String[3];
+                String incorrect_answers_strings[]= new String[3];
                 (radioGroup.getChildAt(positionsList.get(0))).setVisibility(View.VISIBLE);
                 (radioGroup.getChildAt(positionsList.get(1))).setVisibility(View.VISIBLE);
                 (radioGroup.getChildAt(positionsList.get(2))).setVisibility(View.VISIBLE);
                 (radioGroup.getChildAt(positionsList.get(3))).setVisibility(View.VISIBLE);
 
+                radioGroup.getChildAt(0).setBackgroundColor(getResources().getColor(R.color.black));
+                radioGroup.getChildAt(1).setBackgroundColor(getResources().getColor(R.color.white));
+                radioGroup.getChildAt(2).setBackgroundColor(getResources().getColor(R.color.black));
+                radioGroup.getChildAt(3).setBackgroundColor(getResources().getColor(R.color.white));
+
+                RadioButton r1=(RadioButton) findViewById(R.id.r1);
+                r1.setHighlightColor(getResources().getColor(R.color.white));
+                r1.setTextColor(getResources().getColor(R.color.white));
+                RadioButton r2=(RadioButton) findViewById(R.id.r2);
+                r2.setHighlightColor(getResources().getColor(R.color.black));
+                r2.setTextColor(getResources().getColor(R.color.black));
+                RadioButton r3=(RadioButton) findViewById(R.id.r3);
+                r3.setHighlightColor(getResources().getColor(R.color.black));
+                r3.setTextColor(getResources().getColor(R.color.white));
+                RadioButton r4=(RadioButton) findViewById(R.id.r4);
+                r4.setHighlightColor(getResources().getColor(R.color.black));
+                r4.setTextColor(getResources().getColor(R.color.black));
+
                 JSONArray incorrect_answers=question_data.getJSONArray("incorrect_answers");
-                incorrect_answers_string[0]=incorrect_answers.getString(0);
-                incorrect_answers_string[1]=incorrect_answers.getString(1);
-                incorrect_answers_string[2]=incorrect_answers.getString(2);
+                incorrect_answers_strings[0]=incorrect_answers.getString(0);
+                incorrect_answers_strings[1]=incorrect_answers.getString(1);
+                incorrect_answers_strings[2]=incorrect_answers.getString(2);
 
                 for(int j=0; j<3;j++){
-                    ((RadioButton)radioGroup.getChildAt(positionsList.get(j+1))).setText(fromHtml(incorrect_answers_string[j]).toString());
+                    ((RadioButton)radioGroup.getChildAt(positionsList.get(j+1))).setText(fromHtml(incorrect_answers_strings[j]).toString());
                 }
                 ((RadioButton)radioGroup.getChildAt(0)).setText(fromHtml("A. "+ ((RadioButton) radioGroup.getChildAt(0)).getText().toString()).toString());
                 ((RadioButton)radioGroup.getChildAt(1)).setText(fromHtml("B. "+ ((RadioButton) radioGroup.getChildAt(1)).getText().toString()).toString());
@@ -134,17 +149,34 @@ public class QuizActivity extends AppCompatActivity {
             }
             else if (question_data.getString("type").equals("boolean")){
                 //Hide the other two buttons
-                (radioGroup.getChildAt(positionsList.get(0))).setVisibility(View.VISIBLE);
-                (radioGroup.getChildAt(positionsList.get(1))).setVisibility(View.VISIBLE);
-                (radioGroup.getChildAt(positionsList.get(2))).setVisibility(View.GONE);
-                (radioGroup.getChildAt(positionsList.get(3))).setVisibility(View.GONE);
+                Random rand= new Random();
+                int correctPosition = rand.nextInt(1) + 0;
+                int incorrectPosition = 0;
+                switch(correct_position){
+                    case 0:incorrectPosition=1;
+                        break;
+                    case 1: incorrectPosition=0;
+                        break;
+                }
 
-                String incorrect_answers_string= new String();
-                JSONArray incorrect_answers=question_data.getJSONArray("incorrect_answers");
-                incorrect_answers_string=incorrect_answers.getString(0);
+                radioGroup.getChildAt(0).setVisibility(View.VISIBLE);
+                radioGroup.getChildAt(1).setVisibility(View.VISIBLE);
+                radioGroup.getChildAt(2).setVisibility(View.GONE);
+                radioGroup.getChildAt(3).setVisibility(View.GONE);
 
-                ((RadioButton)radioGroup.getChildAt(positionsList.get(1))).setText(fromHtml(incorrect_answers_string).toString());
+                radioGroup.getChildAt(0).setBackgroundColor(getResources().getColor(R.color.black));
+                radioGroup.getChildAt(1).setBackgroundColor(getResources().getColor(R.color.white));
+                RadioButton r1=(RadioButton) findViewById(R.id.r1);
+                r1.setHighlightColor(getResources().getColor(R.color.white));
+                r1.setTextColor(getResources().getColor(R.color.white));
+                RadioButton r2=(RadioButton) findViewById(R.id.r2);
+                r2.setHighlightColor(getResources().getColor(R.color.black));
+                r2.setTextColor(getResources().getColor(R.color.black));
 
+                String incorrect_answer_string= question_data.getJSONArray("incorrect_answers").getString(0);
+
+                ((RadioButton)radioGroup.getChildAt(correctPosition)).setText(fromHtml(correctString).toString());
+                ((RadioButton)radioGroup.getChildAt(incorrectPosition)).setText(fromHtml(incorrect_answer_string).toString());
                 //Not needed for two options
 //                ((RadioButton)radioGroup.getChildAt(0)).setText("A. "+ ((RadioButton) radioGroup.getChildAt(0)).getText().toString());
 //                ((RadioButton)radioGroup.getChildAt(positionsList.get(1))).setText("B. "+ ((RadioButton) radioGroup.getChildAt(positionsList.get(1))).getText().toString());
@@ -210,6 +242,37 @@ public class QuizActivity extends AppCompatActivity {
                         //do something here
                         results=response.getJSONArray("results");
                         loadNextQuestion();
+                    }
+                    else if (response.getString("response_code").equals("3")) {
+                        //Token not found, request the token?
+                        String requestTokenUrl="https://opentdb.com/api_token.php?command=request";
+                        JsonObjectRequest requestToken = new JsonObjectRequest(requestTokenUrl, null, new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        });
+
+                    }
+                    else if (response.getString("response_code").equals("4")) {
+                        //resetting the token is necessary
+                        String resetTokenUrl = "https://opentdb.com/api_token.php?command=reset&token";
+                        JsonObjectRequest resetToken= new JsonObjectRequest(resetTokenUrl, null, new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Log.d("TOKEN", "Reset! ");
+
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        });
                     }
                 } catch(JSONException e){
                     throw new RuntimeException(e);

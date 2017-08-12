@@ -101,7 +101,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:buttonTint="#FFF"
                 android:textSize="20dp"
                 android:background="@drawable/button_background_dark"
                 android:textColor="#fff"
@@ -123,7 +122,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:buttonTint="#FFF"
                 android:textSize="20dp"
                 android:textColor="#fff"
                 />
