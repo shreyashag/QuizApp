@@ -1,7 +1,9 @@
 package in.shreyashagarwal.userinput_3_quizapp;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -10,9 +12,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,6 +28,21 @@ import java.util.Date;
 
 public class ScoreActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE_FOR_SCREENSHOT = 53;
+
+    public int getHighScore(){
+        SharedPreferences sharedPref = this.getSharedPreferences("myPrefsKey",Context.MODE_PRIVATE);
+        Integer highScore= sharedPref.getInt("highScore", 0 );
+        return highScore;
+    }
+
+    public void setHighScore(Integer score){
+        SharedPreferences sharedPref = this.getSharedPreferences("myPrefsKey",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("highScore", score);
+        editor.commit();
+        Log.d("WRITTEN highScore"+ score, "to preferences ");
+        return;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +100,19 @@ public class ScoreActivity extends AppCompatActivity {
 
         Intent recievedIntent = getIntent();
         Bundle bd = recievedIntent.getExtras();
-        int score=0;
+        Integer score=0;
         if(bd != null)
         {
             score = (int) bd.get("correct");
         }
         TextView ScoreView=(TextView)findViewById(R.id.scoreView);
         ScoreView.setText( (score+"/10").toString());
+        Integer highScore= getHighScore();
+        if (score>highScore){
+            setHighScore(score);
+            Toast.makeText(getApplicationContext(),"New high Score!",Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
